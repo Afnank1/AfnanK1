@@ -1,0 +1,64 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: RandomImageDisplay(),
+    );
+  }
+}
+
+class RandomImageDisplay extends StatefulWidget {
+  @override
+  _RandomImageDisplayState createState() => _RandomImageDisplayState();
+}
+
+class _RandomImageDisplayState extends State<RandomImageDisplay> {
+  List<String> images = [
+    'images/A-1.png',
+    'images/A-2.png',
+    'images/A-3.png',
+    'images/A-4.png',
+    'images/A-5.png',
+    'images/A-6.png',
+  ];
+
+  void _shuffleImages() {
+    setState(() {
+      images.shuffle();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Random Image Display'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: _shuffleImages,
+              child: Text('Show Random Image'),
+            ),
+            SizedBox(height: 20),
+            if (images.isNotEmpty)
+              Image.asset(
+                images[0],
+                width: 200,
+                height: 200,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
